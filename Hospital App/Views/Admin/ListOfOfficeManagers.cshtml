@@ -1,0 +1,54 @@
+﻿@model IEnumerable<OfficeManager>
+@{
+    ViewData["Title"] = "List Of Office Managers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Office Managers</li>
+        <li class="active">List of Office Managers</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+<hr />
+
+<p>
+    <a asp-action="AddOfficeManager" asp-controller="Admin" class="btn btn-primary">Create New</a>
+</p>
+
+    <table class="table table-hover">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>ID Numer</th>
+            <th>Contact Number</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>
+                <a asp-action="AddOfficeManager">Action</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var officeManager in Model)
+        {
+            <tr>
+                <td>@officeManager.FirstName</td>
+                <td>@officeManager.Surname</td>
+                <td>@officeManager.IDNumber</td>
+                <td>@officeManager.ContactNumber</td>
+                <td>@officeManager.EmailAddress</td>
+                <td>@officeManager.Gender</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

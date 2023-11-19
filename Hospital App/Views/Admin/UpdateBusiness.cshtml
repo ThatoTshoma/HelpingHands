@@ -1,0 +1,139 @@
+﻿@model Hospital_App.CollectionViewModel.BusinessCollection
+@{
+    ViewData["Title"] = "Update Business Info";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Business info</li>
+        <li class="active">Update Business Info</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+    <h2><b>@ViewData["Title"]</b></h2>
+
+    <form asp-controller="Admin" asp-action="UpdateBusiness" method="post">
+        <hr />
+        <input type="hidden" asp-for="Business.OrganizationID" />
+
+        <div class="form-horizontal">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Business.OrganizationName" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Business.OrganizationName" class="form-control" />
+                    <span asp-validation-for="Business.OrganizationName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Business.NPONumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Business.NPONumber" class="form-control" />
+                    <span asp-validation-for="Business.NPONumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Business.AddressLine1" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Business.AddressLine1" class="form-control" />
+                    <span asp-validation-for="Business.AddressLine1" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Business.AddressLine2" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Business.AddressLine2" class="form-control" />
+                    <span asp-validation-for="Business.AddressLine2" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="City" class="control-label col-md-2">City</label>
+                <div class="col-md-10">
+                    <select for="City" asp-items="@(new SelectList(Model.Cities, "CityID", "CityName"))" class="form-control" id="City">
+                        <option value="">Select City</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Business.SuburbID" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <select asp-for="Business.SuburbID" class="form-control" id="Suburb"></select>
+                    <span asp-validation-for="Business.SuburbID" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Business.ConatactNumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Business.ConatactNumber" class="form-control" />
+                    <span asp-validation-for="Business.ConatactNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Business.Email" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Business.Email" class="form-control" />
+                    <span asp-validation-for="Business.Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Business.OperatingHours" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Business.OperatingHours" class="form-control" />
+                    <span asp-validation-for="Business.OperatingHours" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            @if (ViewBag.message != null)
+            {
+                <h5 class="alert alert-success">@ViewBag.message</h5>
+            }
+        </div>
+    </form>
+</div>
+
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var cityDropdown = $("#City");
+            var suburbDropdown = $("#Suburb");
+
+            cityDropdown.on("change", function () {
+                var selectedCityId = $(this).val();
+                suburbDropdown.empty();
+
+                if (selectedCityId) {
+                    $.ajax({
+                        url: "/Patient/GetSuburbsByCity",
+                        method: "GET",
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                suburbDropdown.append($('<option> ', {
+                                    value: item.suburbID,
+                                    text: item.suburbName
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

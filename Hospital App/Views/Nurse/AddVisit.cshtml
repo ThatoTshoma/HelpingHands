@@ -1,0 +1,144 @@
+﻿@model Hospital_App.CollectionViewModel.VisitCollection
+@{
+    ViewData["Title"] = "Add Visit";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Visit</li>
+        <li class="active">Add Visit</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+<form asp-controller="Nurse" asp-action="AddVisit" method="post">
+    <input asp-for="Visit.ContractID" type="hidden" />
+
+
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Visit.Contract.ContractDate)
+                </dt>
+                <dd>
+                    <span>@Model.Contracts.FirstOrDefault(c => c.ContractID == Model.Visit.ContractID)?.ContractDate</span>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Visit.Contract.AddressLine1)
+                </dt>
+                <dd>
+                    <span>@Model.Contracts.FirstOrDefault(c => c.ContractID == Model.Visit.ContractID)?.AddressLine1</span>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Visit.Contract.AddressLine2)
+                </dt>
+                <dd>
+                    <span>@Model.Contracts.FirstOrDefault(c => c.ContractID == Model.Visit.ContractID)?.AddressLine2</span>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Visit.Contract.WoundDesc)
+                </dt>
+                <dd>
+                    <span>@Model.Contracts.FirstOrDefault(c => c.ContractID == Model.Visit.ContractID)?.WoundDesc</span>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Visit.Contract.Status)
+                </dt>
+                <dd>
+                    <span>@Model.Contracts.FirstOrDefault(c => c.ContractID == Model.Visit.ContractID)?.Status</span>
+                </dd>
+             
+            </dl>
+        </div>
+        <hr style="border: 0; height: 4px; background: black;">
+
+    
+
+        <div class="form-group">
+            <label asp-for="Visit.VistDate" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Visit.VistDate" class="form-control"  type="date"/>
+                @if (ViewBag.Messege != null)
+                {
+                    <span class="text-danger">@ViewBag.Messege</span>
+                }
+                <span asp-validation-for="Visit.VistDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Visit.ApproxArriTime" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Visit.ApproxArriTime" class="form-control" type="time">
+                <span asp-validation-for="Visit.ApproxArriTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Visit.ArriveTime" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Visit.ArriveTime" class="form-control" type="time">
+                <span asp-validation-for="Visit.ArriveTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Visit.DepartTime" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Visit.DepartTime" class="form-control" type="time">
+                <span asp-validation-for="Visit.DepartTime" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Visit.WoundCondition" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Visit.WoundCondition" class="form-control"></textarea>
+                <span asp-validation-for="Visit.WoundCondition" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Visit.Note" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Visit.Note" class="form-control"></textarea>
+                <span asp-validation-for="Visit.Note" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-success">Add</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="~/css/chosen.min.css" rel="stylesheet" />
+    <script src="~/js/chosen.jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#Dropdown").chosen({
+                width: "50%"
+            });
+
+        });
+
+    </script>
+}

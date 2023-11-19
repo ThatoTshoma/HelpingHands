@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Contract>
+@{
+    ViewData["Title"] = "List Of All Contracts";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Contract</li>
+        <li class="active">All Contracts</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+<hr />
+
+<form method="get" asp-action="ViewAllContract" id="searchForm">
+    <div class="form-group">
+        <label for="status">View By:</label>
+        <select class="form-control" id="status" name="status">
+            <option value="">Select Status</option>
+            <option value="New">New</option>
+            <option value="Assigned">Assigned</option>
+            <option value="Closed">Closed</option>
+        </select>
+    </div>
+    @if (Model.Count() > 0)
+    {
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Contract Date</th>
+                    <th>Patient</th>
+                    <th>Address Line 1</th>
+                    <th>Address Line 2</th>
+                    <th>Suburb</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contract in Model)
+                {
+                    <tr>
+                        <td>@contract.ContractDate.ToString("dd/MM/yyyy")</td>
+                        <td>@contract.Patient.FullName</td>
+                        <td>@contract.AddressLine1</td>
+                        <td>@contract.AddressLine2</td>
+                        <td>@contract.Suburb.SuburbName</td>
+                        <td>@contract.Status</td>
+
+
+                        <td>
+                            <a asp-action="AssignContract" asp-controller="Nurse" asp-route-id="@contract.ContractID">
+                                <i class="fa fa-pencil-square-o" style="font-size: 19px">Assign</i>
+                            </a> |
+                            <a asp-action="AddVisit" asp-controller="Nurse" asp-route-id="@contract.ContractID">
+                                <i class="fa fa-plus" style="font-size: 19px; color: lightblue">Add Visit</i>
+                            </a> |
+                            <a asp-action="DeleteAppointment" asp-action="UpdateNurse" asp-route-id="@contract.ContractID">
+                                <i class="fa fa-trash" style="font-size: 19px; color: red">Delete</i>
+                            </a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+    }
+    else
+    {
+        <h1 class="alert alert-danger">@ViewBag.message</h1>
+    }
+
+
+</form>
+</div>
+
+<script>
+    document.getElementById('status').addEventListener('change', function () {
+        document.getElementById('searchForm').submit();
+    });
+</script>

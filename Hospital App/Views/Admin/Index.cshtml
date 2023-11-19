@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Dashboard</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><b>Admin Dashboard</b></h1>
+        </div>
+    </div>
+    <p class="text-success">@ViewBag.Messege</p>
+    <div class="panel panel-container">
+        <div class="row">
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-teal panel-widget border-right">
+                    <a asp-controller="Admin" asp-action="ListOfNurses" style="text-decoration: none; color: inherit;">
+                        <div class="row no-padding">
+                            <em class="fa fa-user-md color-blue" style="font-size: 60px;"></em>
+                            <div class="large count"></div>
+                            <div class="text-muted" style="font-size: 18px;">Nurses</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-blue panel-widget border-right">
+                    <a asp-controller="Admin" asp-action="ListOfOfficeManagers" style="text-decoration: none; color: inherit;">
+
+                        <div class="row no-padding">
+                            <em class="fa fa-user color-red" style="font-size: 60px;"></em>
+                            <div class="large count"></div>
+                            <div class="text-muted" style="font-size: 18px;">Office Managers</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-blue panel-widget border-right">
+                    <a asp-controller="Admin" asp-action="ViewSuburb" style="text-decoration: none; color: inherit;">
+
+                        <div class="row no-padding">
+                            <em class="fa fa-map-marker color-orange" style="font-size: 60px;"></em>
+                            <div class="large count"></div>
+                            <div class="text-muted" style="font-size: 18px;">Suburbs </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-blue panel-widget border-right">
+                    <a asp-controller="Admin" asp-action="AddBusiness" style="text-decoration: none; color: inherit;">
+
+                        <div class="row no-padding">
+                            <em class="fa fa-building color-teal" style="font-size: 60px;"></em>
+                            <div class="large count"></div>
+                            <div class="text-muted" style="font-size: 18px;">Business Info</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

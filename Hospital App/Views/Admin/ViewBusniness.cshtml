@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Business>
+@{
+    ViewData["Title"] = "Business Info";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Business Info</li>
+        <li class="active">View Business Info</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+<hr />
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Organization Name</th>
+            <th>NPO Number</th>
+            <th>Address Line 1</th>
+            <th>Address Line </th>
+            <th>Suburb</th>
+            <th>Contact Number</th>
+            <th>Email Address</th>
+            <th>Operating Hours</th>
+            <th>Action</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var business in Model)
+        {
+            <tr>
+                <td>@business.OrganizationName</td>
+                <td>@business.NPONumber</td>
+                <td>@business.AddressLine1</td>
+                <td>@business.AddressLine2</td>
+                <td>@business.Suburb.SuburbName</td>
+                <td>@business.ConatactNumber</td>
+                <td>@business.Email</td>
+                <td>@business.OperatingHours</td>
+
+                <td>
+                    <a  asp-action="UpdateBusiness" asp-route-id="@business.OrganizationID">
+                        <i class="fa fa-pencil-square-o" style="font-size: 19px"></i>
+                    </a> 
+                   
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

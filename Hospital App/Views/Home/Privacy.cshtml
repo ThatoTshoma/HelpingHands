@@ -1,0 +1,56 @@
+﻿@page
+
+
+
+<div class="container">
+    <h2>Cascading Dropdown Example</h2>
+    <div class="form-group">
+        <label for="City">Select City:</label>
+        <select id="City" class="form-control">
+            <option value="">-- Select City --</option>
+            @foreach (var city in ViewBag.Cities)
+            {
+                <option value="@city.CityID">@city.CityName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Suburb">Select Suburb:</label>
+        <select id="Suburb" class="form-control">
+            <option value="">-- Select Suburb --</option>
+        </select>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var cityDropdown = $("#City");
+            var suburbDropdown = $("#Suburb");
+
+            cityDropdown.on("change", function () {
+                var selectedCityId = $(this).val();
+                suburbDropdown.empty();
+
+                if (selectedCityId) {
+                    $.ajax({
+                        url: "/Home/GetSuburbsByCity", // Adjust the URL to match your controller and action method
+                        method: "GET",
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                suburbDropdown.append($('<option> ', {
+                                    value: item.suburbID,
+                                    text: item.suburbName
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+}

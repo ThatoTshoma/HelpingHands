@@ -1,0 +1,115 @@
+﻿@using Hospital_App.Models
+@model Hospital_App.CollectionViewModel.OfficeManagerCollection
+@{
+    ViewData["Title"] = "Add Office Manager";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Office Manager</li>
+        <li class="active">Add Office Manager</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+    <h2><b>@ViewData["Title"]</b></h2>
+
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <hr />
+        <div class="form-horizontal">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="ApplicationUser.UserName" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="ApplicationUser.UserName" class="form-control" />
+                <span asp-validation-for="ApplicationUser.UserName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="OfficeManager.FirstName" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="OfficeManager.FirstName" class="form-control" />
+                <span asp-validation-for="OfficeManager.FirstName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="OfficeManager.Surname" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="OfficeManager.Surname" class="form-control" />
+                <span asp-validation-for="OfficeManager.Surname" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="OfficeManager.IDNumber" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="OfficeManager.IDNumber" class="form-control" />
+                <span asp-validation-for="OfficeManager.IDNumber" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ApplicationUser.Email" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="ApplicationUser.Email" class="form-control" />
+                <span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="OfficeManager.ContactNumber" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="OfficeManager.ContactNumber" class="form-control" />
+                <span asp-validation-for="OfficeManager.ContactNumber" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="OfficeManager.Gender" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="OfficeManager.Gender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <span asp-validation-for="OfficeManager.Gender" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ApplicationUser.Password" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="ApplicationUser.Password" class="form-control" />
+                <span asp-validation-for="ApplicationUser.Password" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ApplicationUser.ConfirmPassword" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="ApplicationUser.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ApplicationUser.ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary">Add Office Manager</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

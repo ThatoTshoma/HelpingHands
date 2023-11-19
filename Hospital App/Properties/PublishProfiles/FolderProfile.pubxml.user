@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\THATO TSHOMA\Desktop\publish</_PublishTargetUrl>
+    <History>True|2023-11-04T22:26:14.4591926Z;True|2023-10-28T00:53:31.5438253+02:00;True|2023-10-28T00:41:05.5299567+02:00;True|2023-10-18T00:08:19.3040802+02:00;True|2023-10-17T00:46:41.4204789+02:00;True|2023-10-16T22:41:34.0376571+02:00;True|2023-10-13T19:09:42.4596120+02:00;True|2023-10-13T02:25:55.4322929+02:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=sict-sql.mandela.ac.za%3bDatabase=GRP-04-88-HospitalDB%3bTrusted_Connection=False%3b User ID=GRP-04-88%3b Password=grp-04-88-2023#</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Hospital_App.Data.ApplicationDbContext">
+      <Value>Server=sict-sql.mandela.ac.za%3bDatabase=GRP-04-88-HospitalDB%3bTrusted_Connection=False%3b User ID=GRP-04-88%3b Password=grp-04-88-2023#</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

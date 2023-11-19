@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Schedule>
+@{
+    ViewData["Title"] = "List Of Visits";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Schedule</li>
+        <li class="active">List Of Schedule</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+<hr />
+
+
+    <table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Schdule Date</th>
+            <th>Approx Arrive Time</th>
+            <th>Arrive Time</th>
+            <th>Depart Time</th>
+            <th>Wound Condition</th>
+            <th>Note</th>
+            <th>Patient</th>
+            <th>Action</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nurse in Model)
+        {
+            <tr>
+                <td>@nurse.ScheduleDate.ToString("dd/MM/yyyy")</td>
+                <td>@nurse.ApproxArriTime</td>
+                <td>@nurse.ArriveTime</td>
+                <td>@nurse.DepartTime</td>
+                <td>@nurse.WoundCondition</td>
+                <td>@nurse.Note</td>
+                <td>
+                    @if (nurse.Contract != null && nurse.Contract.Patient != null)
+                    {
+                        @nurse.Contract.Patient.FirstName
+                    }
+                </td>
+
+                <td>
+                    <a asp-action="EditVisit" asp-controller="Nurse" asp-route-id="@nurse.ScheduleID">
+                        <i class="fa fa-pencil-square-o" style="font-size: 19px"></i>
+                    </a> |
+                    <a asp-action="DetailOfAppointment" asp-action="UpdateNurse" asp-route-id="@nurse.NurseID">
+                        <i class="fa fa-info-circle" style="font-size: 19px; color: lightblue"></i>
+                    </a> |
+                    <a asp-action="DeleteAppointment" asp-action="UpdateNurse" asp-route-id="@nurse.NurseID">
+                        <i class="fa fa-trash" style="font-size: 19px; color: red"></i>
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

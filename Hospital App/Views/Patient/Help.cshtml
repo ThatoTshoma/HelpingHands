@@ -1,0 +1,63 @@
+﻿@model Hospital_App.CollectionViewModel.PatientChronicCollection
+@{
+    ViewData["Title"] = "Help Center";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Chronic Condition</li>
+        <li class="active">Add Chronic Condition</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Add some basic styling for the help center */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Help Center</h1>
+
+    <h2>Frequently Asked Questions (FAQs)</h2>
+    <ul>
+        <li><strong>How Do I request the contract:</strong>Click at the Request contract menu.</li>
+        <li><strong>How do I change the password:</strong>Click on the far right conner on the username.</li>
+    </ul>
+
+    <h2>Documentation</h2>
+    <p>Provide detailed documentation and user guides here.</p>
+
+    <p>Please click the link below to download the user guide:</p>
+    <a href="~/css/ONP400 Semester 2 PROJECT DELIVERABLES.pdf" title="Click the link to download" download>Download User Guide</a>
+
+</body>
+</html>
+</div>

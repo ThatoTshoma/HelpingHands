@@ -1,0 +1,37 @@
+﻿@model List<PreferedSuburb>
+
+@{
+    ViewData["Title"] = "Nurse Preferred Suburbs";
+}
+
+<h2>Nurse Preferred Suburbs</h2>
+
+@using (Html.BeginForm("ViewNursePreferedSuburb", "OfficeManager", FormMethod.Get))
+{
+    @Html.DropDownList("suburbName", ViewBag.Suburbs as SelectList, "All", new { onchange = "this.form.submit();" })
+    <button type="submit" name="generatePdf" value="true">Generate PDF</button>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Email Address</th>
+            <th>Contact Number</th>
+            <th>Suburb Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nurse.FirstName</td>
+                <td>@item.Nurse.EmailAddress</td>
+                <td>@item.Nurse.ContactNumber</td>
+                <td>@item.Suburb.SuburbName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

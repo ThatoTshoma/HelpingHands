@@ -1,0 +1,115 @@
+﻿@model Hospital_App.CollectionViewModel.ContractCollection
+@{
+    ViewData["Title"] = "Update Contract";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+<style>
+    .required::after {
+        content: '*';
+        color: red;
+    }
+</style>
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Contract</li>
+        <li class="active">Update Contract</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+    <h2><b>@ViewData["Title"]</b></h2>
+
+    <form asp-controller="Patient" asp-action="UpdateContract" method="post">
+        <hr />
+        <div class="form-horizontal">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Contract.ContractID" />
+
+            <div class="form-group">
+                <label asp-for="Contract.AddressLine1" class="required control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Contract.AddressLine1" class="form-control" title="Enter Adderess Line 1" />
+                    <span asp-validation-for="Contract.AddressLine1" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Contract.AddressLine2" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Contract.AddressLine2" class="form-control" title="Enter Address Line 2" />
+                    <span asp-validation-for="Contract.AddressLine2" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="City" class="required control-label col-md-2">City</label>
+                <div class="col-md-10">
+                    <select for="City" asp-items="@(new SelectList(Model.Cities, "CityID", "CityName"))" class="form-control" id="City">
+                        <option value="">Select City</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Contract.SuburbID" class="required control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <select asp-for="Contract.SuburbID" class="form-control" id="Suburb"></select>
+                    <span asp-validation-for="Contract.ContractID" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Contract.WoundDesc" class="required control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <textarea asp-for="Contract.WoundDesc" class="form-control" title="Enter your wound description"></textarea>
+                    <span asp-validation-for="Contract.WoundDesc" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary">Update Contract</button>
+                </div>
+            </div>
+            @if (ViewBag.message != null)
+            {
+                <h5 class="alert alert-success">@ViewBag.message</h5>
+            }
+        </div>
+    </form>
+</div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var cityDropdown = $("#City");
+            var suburbDropdown = $("#Suburb");
+
+            cityDropdown.on("change", function () {
+                var selectedCityId = $(this).val();
+                suburbDropdown.empty();
+
+                if (selectedCityId) {
+                    $.ajax({
+                        url: "/Patient/GetSuburbsByCity",
+                        method: "GET",
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                suburbDropdown.append($('<option> ', {
+                                    value: item.suburbID,
+                                    text: item.suburbName
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

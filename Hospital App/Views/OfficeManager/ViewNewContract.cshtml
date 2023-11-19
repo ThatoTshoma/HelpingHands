@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Contract>
+@{
+    ViewData["Title"] = "List Of New Contract";
+    Layout = "~/Views/Shared/_OfficeManagerLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Contract</li>
+        <li class="active">New Contracts</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+<hr />
+
+
+
+    <table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Contract Date</th>
+            <th>Patient Name</th>
+            <th>Address Line 1</th>
+            <th>Address Line 2</th>
+            <th>Suburb</th>
+            <th>Status</th>
+            <th>Action</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contract in Model)
+        {
+            <tr>
+                <td>@contract.ContractDate.ToString("dd/MM/yyyy")</td>
+                <td>@contract.Patient.FirstName</td>
+                <td>@contract.AddressLine1</td>
+                <td>@contract.AddressLine2</td>
+                <td>@contract.Suburb.SuburbName</td>
+                <td>@contract.Status</td>
+
+
+                <td>
+                    <a asp-action="AssignContract" asp-controller="OfficeManager" asp-route-id="@contract.ContractID">
+                        <i class="fa fa-pencil-square-o" style="font-size: 19px">Assign</i>
+                    </a> 
+                    
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

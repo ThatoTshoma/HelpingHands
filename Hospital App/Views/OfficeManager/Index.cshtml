@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Contract>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_OfficeManagerLayout.cshtml";
+}
+<style>
+    .table-wrapper {
+        max-height: 300px;
+        overflow-y: scroll;
+        overflow-x: scroll
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+        background-color: white;
+    }
+</style>
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Dashboard</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><b>Office Manager Dashboard</b></h1>
+        </div>
+    </div>
+    <hr />
+    <p class="text-success">@ViewBag.Messege</p>
+    <div class="panel panel-container">
+        <div class="row">
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-teal panel-widget border-right">
+                    <a asp-controller="OfficeManager" asp-action="ViewNewContract" style="text-decoration: none; color: inherit;">
+                        <div class="row no-padding">
+                            <em class="fa fa-book color-blue" style="font-size: 60px;"></em>
+                            <div class="large count"></div>
+                            <div class="text-muted" style="font-size: 18px;">New Contracts</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-blue panel-widget border-right">
+                    <a asp-controller="OfficeManager" asp-action="AddNurse" style="text-decoration: none; color: inherit;">
+
+                        <div class="row no-padding">
+                            <em class="fa fa-user-md color-red" style="font-size: 60px;"></em>
+                            <div class="large count"></div>
+                            <div class="text-muted" style="font-size: 18px;">Add Nurse</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-blue panel-widget border-right">
+                    <a asp-controller="OfficeManager" asp-action="" style="text-decoration: none; color: inherit;">
+
+                        <div class="row no-padding">
+                            <em class="fa fa-xl fa-users color-orange" style="font-size: 60px;"></em>
+                            <div class="large count"></div>
+                            <div class="text-muted" style="font-size: 18px;">Patients</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                <div class="panel panel-blue panel-widget border-right">
+                    <a asp-controller="OfficeManager" asp-action="" style="text-decoration: none; color: inherit;">
+
+                        <div class="row no-padding">
+                            <em class="fa fa-calendar-check-o color-green" style="font-size: 60px;"></em>
+                            <div class="large count"></div>
+                            <div class="text-muted" style="font-size: 18px;">Appointments</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header"><b>New Contracts</b></h3>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Contract Date</th>
+                    <th>Patient</th>
+                    <th>Address Line 1</th>
+                    <th>Address Line 2</th>
+                    <th>Suburb</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contract in Model)
+                {
+                    <tr>
+                        <td>@contract.ContractDate.ToString("dd/MM/yyyy")</td>
+                        <td>@contract.Patient.FullName</td>
+                        <td>@contract.AddressLine1</td>
+                        <td>@contract.AddressLine2</td>
+                        <td>@contract.Suburb.SuburbName</td>
+                        <td>@contract.Status</td>
+
+
+                        <td>
+                            <a asp-action="AssignContract" asp-controller="OfficeManager" asp-route-id="@contract.ContractID">
+                                <i class="fa fa-pencil-square-o" style="font-size: 19px">Assign</i>
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@model Hospital_App.Models.Patient
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Profile</li>
+        <li class="active">Profile Details</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IDNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IDNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmergencyContatctPerson)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmergencyContatctPerson)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmergencyNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmergencyNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="UpdateProfile" asp-route-id="@Model.PatientID">Edit</a> |
+    <a asp-action="Index">Back to Home</a>
+</div>
+</div>

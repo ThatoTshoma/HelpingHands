@@ -1,0 +1,56 @@
+﻿@model Hospital_App.Models.City
+@{
+    ViewData["Title"] = "Add City";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">City</li>
+        <li class="active">Add City</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+
+    <form method="post" asp-action="AddCity">
+        <hr />
+        <div class="form-horizontal">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="CityName" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="CityName" class="form-control" />
+                <span asp-validation-for="CityName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CityAbbreviation" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="CityAbbreviation" class="form-control" />
+                <span asp-validation-for="CityAbbreviation" class="text-danger"></span>
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary">Add City</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

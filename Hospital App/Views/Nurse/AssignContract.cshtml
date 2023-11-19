@@ -1,0 +1,103 @@
+﻿@model Hospital_App.CollectionViewModel.ContractCollection
+@{
+    ViewData["Title"] = "Assign Contact";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Contract</li>
+        <li class="active">Assign Contract</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+<div class="col-md-8">
+
+<form asp-controller="Nurse" asp-action="AssignContract" method="post">
+    <div class="form-horizontal">
+
+        <input asp-for="Contract.ContractID" hidden />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <hr />
+
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Contract.Patient.FirstName)
+                </dt>
+                <dd>
+                    <span>@Model.Patients.FirstOrDefault(c => c.PatientID == Model.Contract.PatientID)?.FirstName</span>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Contract.Patient.Surname)
+                </dt>
+                <dd>
+                    <span>@Model.Patients.FirstOrDefault(c => c.PatientID == Model.Contract.PatientID)?.Surname</span>
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Contract.Patient.ContactNumber)
+                </dt>
+                <dd>
+                    <span>@Model.Patients.FirstOrDefault(c => c.PatientID == Model.Contract.PatientID)?.ContactNumber</span>
+                <dt>
+                        @Html.DisplayNameFor(model => model.Contract.Patient.EmailAddress)
+                </dt>
+                <dd>
+                    <span>@Model.Patients.FirstOrDefault(c => c.PatientID == Model.Contract.PatientID)?.EmailAddress</span>
+                </dd>
+
+
+            </dl>
+        </div>
+            <hr style="border: 0; height: 4px; background: black;">
+
+        <div class="form-group">
+            <label asp-for="Contract.Status"></label>
+            <select asp-for="Contract.Status" class="form-control">
+                <option value="Assigned">Assigned</option>
+                <option value="Closed">Closed</option>
+            </select>
+            <span asp-validation-for="Contract.Status" class="text-danger"></span>
+        </div>
+
+
+        <div>
+            <button type="submit" class="btn btn-success">Save</button>
+
+            @if (Model.Contract.Status == "Assigned")
+            {
+                <a asp-action="ViewAssignedContract" asp-controller="Nurse" class="btn btn-primary">Back</a>
+            }
+            else
+            {
+                <a asp-action="ViewNewContract" asp-controller="Nurse" class="btn btn-Primary">Back</a>
+            }
+        </div>
+    </div>
+</form>
+</div>
+</div>
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" rel="stylesheet">
+    <script>
+        $(function () {
+            $("#dropdown1").chosen();
+        });
+        $(function () {
+            $("#dropdown2").chosen();
+        });
+    </script>
+}

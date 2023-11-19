@@ -1,0 +1,35 @@
+﻿@model Hospital_App.CollectionViewModel.ContractCollection
+
+
+@{
+    ViewData["Title"] = "Are you sure you want to Cancel this Contract?";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Contract</li>
+        <li class="active">Cancel Contract</li>
+    </ol>
+</div>
+
+
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+    <div>
+
+
+        <form asp-action="CancelContract" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Contract.ContractID" />
+            <input type="submit" value="Cancel" class="btn btn-danger" /> |
+            <a asp-action="ViewContract">Back to List</a>
+        </form>
+    </div>
+</div>

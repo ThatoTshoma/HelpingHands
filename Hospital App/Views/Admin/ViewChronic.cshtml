@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Chronic>
+@{
+    ViewData["Title"] = "List Of Chronic Condition";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Chronic Condition</li>
+        <li class="active">View Chronic Condition</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+<p>
+    <a asp-action="AddChronic" asp-controller="Admin" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Chronic Name</th>
+            <th>Description</th>
+            <th>Action</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var chronic in Model)
+        {
+            <tr>
+                <td>@chronic.ChronicName</td>
+                <td>@chronic.Description</td>
+
+
+                <td>
+                    <a asp-action="EditAppointment" asp-action="UpdateNurse" asp-route-id="@chronic.ChronicID">
+                        <i class="fa fa-pencil-square-o" style="font-size: 19px"></i>
+                    </a> |
+                    <a asp-action="DetailOfAppointment" asp-action="UpdateNurse" asp-route-id="@chronic.ChronicID">
+                        <i class="fa fa-info-circle" style="font-size: 19px; color: lightblue"></i>
+                    </a> |
+                    <a asp-action="DeleteAppointment" asp-action="UpdateNurse" asp-route-id="@chronic.ChronicID">
+                        <i class="fa fa-trash" style="font-size: 19px; color: red"></i>
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

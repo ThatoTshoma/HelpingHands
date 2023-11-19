@@ -1,0 +1,48 @@
+﻿@model Hospital_App.CollectionViewModel.PatientChronicCollection
+@{
+    ViewData["Title"] = "Add Chronic Condition";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Chronic Condition</li>
+        <li class="active">Add Chronic Condition</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+    <form asp-controller="Patient" asp-action="AddChronic" method="post">
+        <hr />
+
+        <div class="form-group">
+            <label asp-for="PatientChronic.ChronicID"></label>
+            <select asp-for="PatientChronic.SelectedChronics" asp-items="@(new SelectList(Model.Chronics, "ChronicID", "ChronicName"))" class="form-control" id="Chronic" multiple>
+            </select>
+            <span asp-validation-for="PatientChronic.SelectedChronics" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Chronic</button>
+    </form>
+</div>
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="~/css/chosen.min.css" rel="stylesheet" />
+    <script src="~/js/chosen.jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#Chronic").chosen({
+                width : "50%"
+            });
+            
+        });
+
+    </script>
+}

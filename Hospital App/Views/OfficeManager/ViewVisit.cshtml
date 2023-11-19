@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Visit>
+@{
+    ViewData["Title"] = "List Of Visits";
+    Layout = "~/Views/Shared/_OfficeManagerLayout.cshtml";
+}
+<style>
+    .table-wrapper {
+        max-height: 300px;
+        overflow-y: scroll;
+        overflow-x: scroll
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+        background-color: white;
+    }
+
+    .form-wrapper {
+        margin-bottom: 20px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+    .date-range {
+        margin-top: 10px;
+    }
+
+        .date-range input[type="date"] {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+   
+</style>
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Visit</li>
+        <li class="active">List Of Visit</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+<hr />
+
+    <form asp-action="ViewVisit" method="get" class="date-range">
+        <p>
+            Start Date: @Html.TextBox("startDate", ViewBag.StartDate as string, new { type = "date" })
+            End Date: @Html.TextBox("endDate", ViewBag.EndDate as string, new { type = "date" })
+            <input type="submit" value="Search" />
+            <input type="submit" formaction="GeneratePdf" formmethod="post" value="Generate PDF" style="margin-left: 10px;" />
+        </p>
+    </form>
+
+<div class="table-wrapper">
+        <table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Nurse</th>
+            <th>Visit Date</th>
+            <th>Approx Arrive Time</th>
+            <th>Arrive Time</th>
+            <th>Depart Time</th>
+            <th>Wound Condition</th>
+            <th>Note</th>
+            <th>Patient</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nurse in Model)
+        {
+            <tr>
+                <td>@nurse.Nurse.FirstName</td>
+                <td>@nurse.VistDate.ToString("dd/MM/yyyy")</td>
+                <td>@nurse.ApproxArriTime</td>
+                <td>@nurse.ArriveTime</td>
+                <td>@nurse.DepartTime</td>
+                <td>@nurse.WoundCondition</td>
+                <td>@nurse.Note</td>
+                <td>
+                    @if (nurse.Contract != null && nurse.Contract.Patient != null)
+                    {
+                        @nurse.Contract.Patient.FirstName
+                    }
+                </td>
+
+          
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>

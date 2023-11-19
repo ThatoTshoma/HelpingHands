@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Nurse>
+@{
+    ViewData["Title"] = "List Of Nurses";
+    Layout = "~/Views/Shared/_OfficeManagerLayout.cshtml";
+}
+<style>
+    .dropdown-style {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .btn-style {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+</style>
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Nurses</li>
+        <li class="active">View Nurse</li>
+    </ol>
+</div>
+
+<div class="container px-6 mx-auto grid">
+
+<h2><b>@ViewData["Title"]</b></h2>
+<hr />
+
+@using (Html.BeginForm("ListOfNurses", "OfficeManager", FormMethod.Get))
+{
+    <div style="margin-bottom: 10px;">
+        @Html.Label("suburbName", "suburb Name:")
+        @Html.DropDownList("suburbName", ViewBag.Suburbs as SelectList, "All", new { @class = "dropdown-style", @id ="status", onchange = "this.form.submit();" })
+        <button type="submit" name="generatePdf" value="true" class="btn-style">Generate PDF</button>
+
+    </div>
+}
+
+    <table class="table table-hover">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>ID Numer</th>
+            <th>Contact Number</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Prefered Suburbs</th>
+            <th>Action</th>
+
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nurse in Model)
+        {
+            <tr>
+                <td>@nurse.FirstName</td>
+                <td>@nurse.Surname</td>
+                <td>@nurse.IDNumber</td>
+                <td>@nurse.ContactNumber</td>
+                <td>@nurse.EmailAddress</td>
+                <td>@nurse.Gender</td>
+                <td>
+                    @if (nurse.PreferedSuburbs != null && nurse.PreferedSuburbs.Any())
+                    {
+                        foreach (var patientChronic in nurse.PreferedSuburbs)
+                        {
+                            @patientChronic.Suburb.SuburbName
+
+                            <br />
+                        }
+                    }
+                    else
+                    {
+                        <p>No Prefered Suburb found.</p>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="OfficeManager" asp-action="UpdateNurse" asp-route-ID="@nurse.NurseID" class="btn btn-primary mx-1">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="~/css/chosen.min.css" rel="stylesheet" />
+    <script src="~/js/chosen.jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#status").chosen({
+                width: "20%"
+            });
+
+        });
+
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+
+}
